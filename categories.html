@@ -1,0 +1,861 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Categories</title>
+	<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta name="robots" content="all" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta http-equiv="imagetoolbar" content="false" />	
+	<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #d4b896;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 40px;
+            padding: 40px;
+            justify-items: center;  
+        }
+
+        .category-card {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card-rect {
+            width: 250px;
+            height: 300px;    
+            background: #D9CFC7;
+    /* border-radius: 10px; */
+            border: 2px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            font-size: 18px;
+            color: black;
+        }
+        .modal {
+            pointer-events: auto;
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+     }
+
+        .modal-header-bar {
+            width: 100%;
+            background-color: #d4b896;
+            padding: 1rem 2rem; 
+            color: #f9f8f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+        /* .modal-header-bar h2 {
+            margin: 0;
+            font-size: 32px;
+            color: #f9f8f6;
+        } */
+        .modal-content {
+            pointer-events: auto;
+            background: white;
+            color: black;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 40px;
+            border-radius: 0;
+            box-sizing: border-box;
+
+            padding-top: 40px; 
+            padding-left: 40px;
+            padding-right: 40px;    
+            padding-bottom: 40px;
+
+            overflow-y: auto; 
+        }
+        .back-arrow {
+            position: absolute;
+            left: 25px;                  
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+            color: #f9f8f6;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+         }
+
+        .modal-inner {
+            padding: 0 40px 40px; 
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .modal-inner-image-container {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .modal-inner-image {
+            width: 100%;
+            /* Maintain aspect ratio similar to the design (approx 3:1) */
+            height: 0;
+            padding-bottom: 30%; /* Adjust this value for different image heights */
+            background-image: url('your_nature_image.jpg'); /* REPLACE with actual image path */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .people-grid {
+            display: flex; /* Using flexbox for simplicity for 4 items */
+            justify-content: space-around; /* Spreads the cards out */
+            gap: 90px;
+            padding: 0 40px; /* Internal padding for the grid section */
+            margin-bottom: 50vh;
+        }
+
+        .person-card {
+            text-align: center;
+        }
+
+        .person-card-rect {
+            width: 220px; 
+            height: 280px;
+            background: #D9CFC7;
+            margin-bottom: 5px;
+        }
+
+        /* Styling the clickable header */
+        .person-card-header {
+            cursor: pointer; /* Indicates it's clickable */
+        }
+
+        .person-response-content {
+            display: none;
+            padding: 10px 0;
+            margin-top: -5px;
+            text-align: center;
+            color: black; 
+            font-size: 14px;
+            width: 200px; 
+        }
+
+        .person-response-content p {
+            color: black; 
+            margin-bottom: 5px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .person-name {
+            font-size: 16px;
+            color: black; 
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease; 
+        }
+
+        .person-name::before {
+            content: "►"; 
+            font-size: 12px;
+            margin-right: 5px;
+            display: inline-block; 
+            transition: transform 0.3s ease;
+        }
+
+        .active .person-name::before {
+            transform: rotate(90deg); 
+        }
+
+
+
+/* ------------------------------------------- */
+	</style>
+</head>	
+
+<body>
+    <header>
+        <nav>
+                <a href="index.html">About Us</a>
+                <a href="categories.html">Categories</a>
+
+        </nav>
+    </header>
+
+    <div class="categories-container">
+
+        <div class="category-card" data-modal="modal1">
+            <div class="card-rect"></div>
+            <p>Food</p>
+        </div>
+
+        <div class="category-card" data-modal="modal2">
+            <div class="card-rect"></div>
+            <p>Nature</p>
+        </div>
+
+        <div class="category-card" data-modal="modal3">
+            <div class="card-rect"></div>
+            <p>Clubs</p>
+        </div>
+        <div class="category-card" data-modal="modal4">
+            <div class="card-rect"></div>
+            <p>Athletics</p>
+        </div>
+        
+        <div class="category-card" data-modal="modal5">
+            <div class="card-rect"></div>
+            <p>Housing</p>
+        </div>
+
+        <div class="category-card" data-modal="modal6">
+            <div class="card-rect"></div>
+            <p>School Tips</p>
+        </div>
+
+        <div class="category-card" data-modal="modal7">
+            <div class="card-rect"></div>
+            <p>Secret Sauce</p>
+        </div>
+        <div class="category-card" data-modal="modal8">
+            <div class="card-rect"></div>
+            <p>Miscellaneous</p>
+        </div>
+
+    </div>
+    <div class="modal" id="modal1">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Food</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blahlah blah blahlah blah blahlah blah blahlah blah blahlah blah blahlah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal" id="modal2">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Nature</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal 3 -->
+    <div class="modal" id="modal3">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Clubs</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal4">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Athletics</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal5">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Housing</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal" id="modal6">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>School Tips</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal 3 -->
+    <div class="modal" id="modal7">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Secret Sauce</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal8">
+
+        <div class="modal-header-bar">
+            <span class="back-arrow">&#x2190;</span>
+            <h2>Miscellaneous</h2> 
+        </div>
+            <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-inner-image-container">
+                    <div class="modal-inner-image" style="background-image: url('flatirons.jpg');"></div>
+                </div>
+
+                <div class="people-grid">
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="ethan-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Ethan</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="ethan-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="andre-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Andre</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="andre-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="jared-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Jared</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="jared-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-card-header" data-target="eddie-response">
+                            <div class="person-card-rect"></div>
+                            <p class="person-name">Eddie</p> 
+                        </div>
+                        
+                        <div class="person-response-content" id="eddie-response">
+                            <p>blah blah blah</p>
+                            <p>It can contain multiple lines of text or even images.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+        $.backstretch("bg.jpg", {speed: 150});
+    </script>
+
+    <script>
+        document.querySelectorAll(".category-card").forEach(card => {
+            card.addEventListener("click", () => {
+                let modalId = card.getAttribute("data-modal");
+                document.getElementById(modalId).style.display = "block";
+            });
+        });
+
+        document.querySelectorAll(".close, .back-arrow").forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.closest(".modal").style.display = "none";
+            });
+        });
+
+        window.addEventListener("click", e => {
+            if (e.target.classList.contains("modal")) {
+                e.target.style.display = "none";
+            }
+        });
+
+
+    document.querySelectorAll(".person-card-header").forEach(header => {
+        header.addEventListener("click", () => {
+            let targetId = header.getAttribute("data-target");
+            let content = document.getElementById(targetId);
+            
+            const isCurrentlyActive = header.classList.contains("active");
+
+            const modalContent = header.closest(".modal-content"); 
+            
+            let allCards = header.closest(".people-grid").querySelectorAll(".person-card-header");
+            
+            allCards.forEach(otherHeader => {
+                let otherTargetId = otherHeader.getAttribute("data-target");
+                let otherContent = document.getElementById(otherTargetId);
+                
+                otherContent.style.display = "none";
+                otherHeader.classList.remove("active");
+            });
+
+            if (!isCurrentlyActive) {
+                content.style.display = "block";
+                header.classList.add("active");
+            }
+
+        });
+    });
+</script>
+    </script>
+</body>	
+</html>
