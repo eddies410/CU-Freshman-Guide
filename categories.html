@@ -1,13 +1,9 @@
 <!doctype html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Categories</title>
-	<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
-	<meta http-equiv="pragma" content="no-cache" />
-	<meta name="robots" content="all" />
-	<meta name="MSSmartTagsPreventParsing" content="true" />
-	<meta http-equiv="imagetoolbar" content="false" />	
 	<style>
         * {
             margin: 0;
@@ -58,8 +54,11 @@
         .card-rect {
             width: 250px;
             height: 300px;    
-            background: #D9CFC7;
-    /* border-radius: 10px; */
+            background-image: url('placeholder-category-image.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-color: #D9CFC7; 
+
             border: 2px solid #ccc;
             margin-bottom: 10px;
         }
@@ -91,11 +90,7 @@
             position: relative;
             box-sizing: border-box;
         }
-        /* .modal-header-bar h2 {
-            margin: 0;
-            font-size: 32px;
-            color: #f9f8f6;
-        } */
+
         .modal-content {
             pointer-events: auto;
             background: white;
@@ -146,19 +141,19 @@
 
         .modal-inner-image {
             width: 100%;
-            /* Maintain aspect ratio similar to the design (approx 3:1) */
+        
             height: 0;
-            padding-bottom: 30%; /* Adjust this value for different image heights */
-            background-image: url('your_nature_image.jpg'); /* REPLACE with actual image path */
+            padding-bottom: 30%;
+            background-image: url('your_nature_image.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .people-grid {
-            display: flex; /* Using flexbox for simplicity for 4 items */
-            justify-content: space-around; /* Spreads the cards out */
+            display: flex; 
+            justify-content: space-around; 
             gap: 90px;
-            padding: 0 40px; /* Internal padding for the grid section */
+            padding: 0 40px;
             margin-bottom: 50vh;
         }
 
@@ -169,13 +164,17 @@
         .person-card-rect {
             width: 220px; 
             height: 280px;
-            background: #D9CFC7;
-            margin-bottom: 5px;
+            background-image: url('placeholder-person-image.png'); 
+            background-size: cover;
+            background-position: center;
+            background-color: #D9CFC7; 
+            
+            margin-bottom: 5px;        
         }
 
-        /* Styling the clickable header */
+      
         .person-card-header {
-            cursor: pointer; /* Indicates it's clickable */
+            cursor: pointer;
         }
 
         .person-response-content {
@@ -235,40 +234,40 @@
     <div class="categories-container">
 
         <div class="category-card" data-modal="modal1">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Food</p>
         </div>
 
         <div class="category-card" data-modal="modal2">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Nature</p>
         </div>
 
         <div class="category-card" data-modal="modal3">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Clubs</p>
         </div>
         <div class="category-card" data-modal="modal4">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Athletics</p>
         </div>
         
         <div class="category-card" data-modal="modal5">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Housing</p>
         </div>
 
         <div class="category-card" data-modal="modal6">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>School Tips</p>
         </div>
 
         <div class="category-card" data-modal="modal7">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Secret Sauce</p>
         </div>
         <div class="category-card" data-modal="modal8">
-            <div class="card-rect"></div>
+            <div class="card-rect" style="background-image: url('category1-forest.jpg');"></div>
             <p>Miscellaneous</p>
         </div>
 
@@ -288,7 +287,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -300,7 +299,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -322,7 +321,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -354,7 +353,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -366,7 +365,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -377,7 +376,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -388,7 +387,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect"style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -421,7 +420,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -433,7 +432,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -444,7 +443,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -455,7 +454,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -487,7 +486,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -499,7 +498,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -510,7 +509,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -521,7 +520,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -553,7 +552,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -565,7 +564,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -576,7 +575,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -587,7 +586,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -619,7 +618,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -631,7 +630,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -642,7 +641,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -653,7 +652,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -686,7 +685,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -698,7 +697,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -709,7 +708,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -720,7 +719,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
@@ -752,7 +751,7 @@
                 <div class="people-grid">
                     <div class="person-card">
                         <div class="person-card-header" data-target="ethan-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-ethan.png');"></div>
                             <p class="person-name">Ethan</p> 
                         </div>
                         
@@ -764,7 +763,7 @@
 
                     <div class="person-card">
                         <div class="person-card-header" data-target="andre-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-andre.png');"></div>
                             <p class="person-name">Andre</p> 
                         </div>
                         
@@ -775,7 +774,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="jared-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-jared.png');"></div>
                             <p class="person-name">Jared</p> 
                         </div>
                         
@@ -786,7 +785,7 @@
                     </div>
                     <div class="person-card">
                         <div class="person-card-header" data-target="eddie-response">
-                            <div class="person-card-rect"></div>
+                            <div class="person-card-rect" style="background-image: url('person-eddie.png');"></div>
                             <p class="person-name">Eddie</p> 
                         </div>
                         
