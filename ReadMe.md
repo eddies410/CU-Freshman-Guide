@@ -31,7 +31,7 @@ CU-Freshman-Guide/
 │   ├── ethan-photo.jpg
 │   ├── flatirons.jpg
 │   └── move-in-mission.jpeg
-└── ReadMe.md          # This file
+└── README.md          # This file
 ```
 
 ## Usage
